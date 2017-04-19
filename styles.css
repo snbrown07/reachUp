@@ -1,11 +1,20 @@
 h1{
     font-family: Handlee;
+    text-align: center;
+    font-weight: bold;
+    font-size: 75px;
+}
+.down{
+    text-align: center;
+    font-size: 45px;
 }
 .hidden{
     display: none;
 }
 .marsh{
     width: 50%;
+    margin-top: 10px;
+    font-size: 15px;
 }
 
 .center-block {
