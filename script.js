@@ -1,22 +1,39 @@
-$(document).ready(function() {
-    var queryParams = $.getQueryParameters();
-    console.log(queryParams);
-    var hash = window.location.hash;
-    var token = hash.substring(14, hash.length);
-    console.log(token);
+// this function takes a string (searchTerm) and queries the Tumblr API to find
+// posts tagged with that string
+var queryTumblrApi = function(searchTerm) {
+    // base Tumblr API url
+    var url = "https://api.tumblr.com/v2/tagged?api_key=YCGzzpJM5T4oFCf6G9SrjiRum32gbsxSFdIqmFdHCmQbHxYD2b&tag=";
+    // adds search term to the end of the URL
+    url = url + searchTerm;
+    
+    // calls the API with the URL that includes the search term
     $.ajax({
-            url: "https://api.instagram.com/v1/tags/" + queryParams.term + "/media/recent?access_token=" + token,
-            dataType: "jsonp"
-        })
-        .done(function(response) {
-            console.log(response);
-        });
-    $("#other").click(function() {
-        $(".hidden").toggle();
+        url: url,
+        dataType: "jsonp"
+    })
+    // this function happens after the response is back from the API
+    .done(function(response) {
+        console.log(response);
+        // TO-DOs
+        // 1: add a for loop that goes over each item in the array of posts in the response
+        // 2: inside the loop, console.log each post
+        // 3: console.log the blog name, post title, and post url for each post
+        // 4: insert blog name and post title in the HTML of the results page
+        // 5: link the post title to the post url
     });
-    $(".marsh").click(function(event) {
-        var name = event.currentTarget.innerText;
-        window.location = "https://api.instagram.com/oauth/authorize/?client_id=ef30f2a1acd34e4b89b5d2d70d357e91&redirect_uri=https://preview.c9users.io/snbrown07/reach-up-project/index.html?term=" + name + "&response_type=token&scope=public_content"
+}
 
+
+// this function happens when the page is done loading
+$(document).ready(function() {
+
+    // this function happens when you click any button with the class "marsh"
+    $(".marsh").click(function(event) {
+        // get the text from the button
+        var buttonName = event.currentTarget.innerText;
+        // call the queryTumblrApi function with the text from the button
+        queryTumblrApi(buttonName);
     });
+
+    
 });
