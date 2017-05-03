@@ -1,8 +1,14 @@
-function makeNewDiv(blog_name, title_post, url_post) {
+function getDateString(timestamp) {
+    var timestamp = new Date(timestamp * 1000);
+    return timestamp.toDateString();
+}
+
+function makeNewDiv(blog_name, title_post, url_post, timestamp) {
     var blogName= $("<h4>").append(blog_name);
     var titlePost= $("<a>").append(title_post);
     titlePost.attr("href", url_post)
-    var newDiv= $("<div>").append(blogName).append(titlePost);
+    var dateString = $("<small>").append(" on " + getDateString(timestamp));
+    var newDiv= $("<div>").append(blogName).append(titlePost).append(dateString);
     newDiv.addClass("col-3");
     $("#results").append(newDiv);
 }
@@ -32,7 +38,7 @@ var queryTumblrApi = function(searchTerm) {
             console.log(response.response[i].blog_name);
             console.log(response.response[i].summary);
             console.log(response.response[i].post_url);
-            makeNewDiv(response.response[i].blog_name, response.response[i].summary, response.response[i].post_url);
+            makeNewDiv(response.response[i].blog_name, response.response[i].summary, response.response[i].post_url, response.response[i].timestamp);
         }
         makeNewTitle(searchTerm);
         // 2: inside the loop, console.log each post
