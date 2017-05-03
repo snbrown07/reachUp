@@ -16,7 +16,7 @@ var queryTumblrApi = function(searchTerm) {
     var url = "https://api.tumblr.com/v2/tagged?api_key=YCGzzpJM5T4oFCf6G9SrjiRum32gbsxSFdIqmFdHCmQbHxYD2b&tag=";
     // adds search term to the end of the URL
     url = url + searchTerm;
-    
+
     // calls the API with the URL that includes the search term
     $.ajax({
         url: url,
