@@ -7,7 +7,7 @@ function makeNewDiv(blog_name, title_post, url_post) {
     $("#results").append(newDiv);
 }
 function makeNewTitle(searchTerm){
-    $("#resultTitle").append("Tumblr Post About " + searchTerm);
+    $("#resultTitle").append("Tumblr posts about " + searchTerm);
 }
 // this function takes a string (searchTerm) and queries the Tumblr API to find
 // posts tagged with that string
