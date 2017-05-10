@@ -54,7 +54,37 @@ $(document).ready(function() {
         var buttonName = event.currentTarget.innerText;
         // call the queryTumblrApi function with the text from the button
         queryTumblrApi(buttonName);
+        getGiphy(buttonName);
     });
+    function getGiphy(topic){
+        var query = topic;
+        console.log(topic);
+        $.ajax({
+            // This is the URL of the API
+            url: "https://api.giphy.com/v1/gifs/search?q=" + query + "&api_key=dc6zaTOxFJmzC"
+            //url: "https://api.flickr.com/services/rest/?method=flickr.photos.search" + "&api.key=2e690647a029e660fe05b925d8f7a009&text=" + query + "&format=json&nojsoncallback=1"
+        }).done(function(response) { // the .done function happens after the API response is returned
+            console.log(response.length);
+                for(var i = 0; i < response.length; i++){
+                    console.log(response[i]);
+                }
+                var image = $('<img>');
+            console.log(image);
+            $("#gif").empty();
+            console.log(response.data.length);
+            var x = 2;
+            if (response.data.length < x) {
+                x = response.data.length;
+            }
+            
+            for (var i = 0; i < x; i++) {
+                console.log(i);
+                var image2 = $('<img>');
+                image2[0].src = response.data[i].images.fixed_width_downsampled.url;
+                $("#gif").append(image2);
+            }
 
+        });
+    };
     
 });
